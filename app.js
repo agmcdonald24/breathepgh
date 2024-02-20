@@ -17,12 +17,20 @@ function updateTimer(elapsedTime) {
     document.getElementById('timer').innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
-// Function to play the breathing animation
-function playBreathingAnimation(inhale) {
-    var animationElement = document.getElementById('breathingAnimation');
-    animationElement.innerText = inhale ? 'Breathe In' : 'Breathe Out';
-    animationElement.style.fontSize = inhale ? '24px' : '18px';
-}
+// Update the breathing animation
+function playBreathingAnimation(isInhale) {
+  var animationElement = document.getElementById('breathingAnimation');
+  animationElement.innerText = isInhale ? 'Breathe In' : 'Breathe Out';
+
+  if (isInhale) {
+      animationElement.classList.add('inhale');
+      animationElement.classList.remove('exhale');
+    } else {
+      animationElement.classList.add('exhale');
+      animationElement.classList.remove('inhale');
+  }
+};
+
 
 // Function to handle breathwork timer logic
 function breathworkTimerLogic() {
@@ -39,16 +47,24 @@ function breathworkTimerLogic() {
     audio.volume = volume;
     audio.play();
 
+    // Add the "inhale" class to start the animation
+    // document.getElementById('breathingAnimation').classList.add('inhale');
+    // document.getElementById('breathingAnimation').classList.remove('exhale');
+
     // Update the breathing animation
-    playBreathingAnimation(!isInhale);
+    playBreathingAnimation(isInhale);
 
     // Update the timer
     updateTimer(elapsedTime);
+
 
     // Check if the total duration has been reached
     if (elapsedTime >= totalDuration) {
         // Stop the timer
         stopTimer();
+
+        document.getElementById('breathingAnimation').classList.remove('inhale');
+        document.getElementById('breathingAnimation').classList.remove('exhale');
     }
 }
 
@@ -57,6 +73,9 @@ document.getElementById('startBtn').addEventListener('click', function () {
     // Disable the Start button and enable the Stop button
     document.getElementById('startBtn').disabled = true;
     document.getElementById('stopBtn').disabled = false;
+
+    document.getElementById('breathingAnimation').classList.remove('exhale');
+    document.getElementById('breathingAnimation').classList.add('inhale');
 
     // Get the selected duration and interval from the dropdowns
     totalDuration = parseInt(document.getElementById('duration').value) * 60;
@@ -78,11 +97,12 @@ function stopTimer() {
     document.getElementById('startBtn').disabled = false;
     document.getElementById('stopBtn').disabled = true;
 
+    // Clear breathing animation
+    document.getElementById('breathingAnimation').classList.remove('inhale');
+    document.getElementById('breathingAnimation').classList.remove('exhale');
+
     // Clear the timer interval
     clearInterval(timerInterval);
-
-    // Reset the breathing animation
-    playBreathingAnimation(true);
 
     // Reset the timer display
     document.getElementById('timer').innerText = '00:00';
