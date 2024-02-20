@@ -1,20 +1,20 @@
 /* Breathe In animation */
 @keyframes breatheInAnimation {
-  0% { font-size: 16px; opacity: 1; }
+  0% { font-size: 18px; opacity: 1; }
   100% { font-size: 24px; opacity: 1; }
 }
 
 /* Breathe Out animation */
 @keyframes breatheOutAnimation {
   0% { font-size: 24px; opacity: 1; }
-  100% { font-size: 16px; opacity: 1; }
+  100% { font-size: 18px; opacity: 1; }
 }
 
 
 .inhale {
-  animation: breatheInAnimation 3s forwards;
+  animation: breatheInAnimation 4s forwards;
 }
 
 .exhale {
-  animation: breatheOutAnimation 3s forwards;
+  animation: breatheOutAnimation 4s forwards;
 }
