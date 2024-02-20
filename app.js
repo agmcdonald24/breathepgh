@@ -10,6 +10,8 @@ var volume = 1.0;
 var timerInterval;
 var startTime;
 
+var animationElement = document.getElementById('breathingAnimation');
+
 // Function to update the timer display
 function updateTimer(elapsedTime) {
     var minutes = Math.floor(elapsedTime / 60);
@@ -19,7 +21,6 @@ function updateTimer(elapsedTime) {
 
 // Update the breathing animation
 function playBreathingAnimation(inhale) {
-  var animationElement = document.getElementById('breathingAnimation');
   animationElement.innerText = inhale ? 'Breathe In' : 'Breathe Out';
 
   if (inhale) {
@@ -99,5 +100,5 @@ document.getElementById('stopBtn').addEventListener('click', function () {
 
   // Reset the timer display
   document.getElementById('timer').innerText = '00:00';
-  document.getElementById('breathingAnimation').innerText = 'Breathe In';
+  animationElement.innerText = 'Breathe In';
 });
