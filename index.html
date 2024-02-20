@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathwork App</title>
+</head>
+<body>
+    <!-- Dropdown for customizing the length of time -->
+    <label for="duration">Select duration (in minutes):</label>
+    <select id="duration">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+    </select>
+
+    <!-- Dropdown for customizing the duration between chimes -->
+    <label for="interval">Select interval duration (in seconds):</label>
+    <select id="interval">
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+
+    <!-- Start/Stop buttons -->
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled>Stop</button>
+
+    <!-- Timer display -->
+    <div id="timer">00:00</div>
+
+    <!-- Breathing animation -->
+    <div id="breathingAnimation">Breathe In</div>
+
+    <script src="app.js"></script>
+</body>
+</html>
