@@ -6,6 +6,7 @@ body {
 }
 
 #settings {
+  width: 50%;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -14,6 +15,14 @@ body {
 .centered {
   display: flex;
   justify-content: center;
+}
+
+#duration-select {
+  width: 10%;
+}
+
+#interval-select {
+  width: 10%;
 }
 
 .padded-container {

@@ -75,8 +75,8 @@ document.getElementById('startBtn').addEventListener('click', function () {
     document.getElementById('breathingAnimation').classList.add('inhale');
 
     // Get the selected duration and interval from the dropdowns
-    totalDuration = parseInt(document.getElementById('duration').value) * 60;
-    breathDuration = Math.round(parseFloat(document.getElementById('interval').value)); // Round to the nearest whole number
+    totalDuration = parseInt(document.getElementById('duration-select').value) * 60;
+    breathDuration = Math.round(parseFloat(document.getElementById('interval-select').value)); // Round to the nearest whole number
 
     // Initialize the start time
     startTime = Date.now();
