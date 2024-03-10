@@ -5,7 +5,20 @@ body {
   gap: 1em;
 }
 
+#settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
 .centered {
+  display: flex;
+  justify-content: center;
+}
+
+.padded-container {
+  width: 50%;
+  height: 2em;
   display: flex;
   justify-content: center;
 }
