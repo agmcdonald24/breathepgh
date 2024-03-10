@@ -17,6 +17,10 @@ body {
   justify-content: center;
 }
 
+.button-container {
+  gap: 0.5em;
+}
+
 #duration-select {
   width: 10%;
 }
@@ -30,6 +34,10 @@ body {
   height: 2em;
   display: flex;
   justify-content: center;
+}
+
+#timer {
+  font-size: 16px;
 }
 
 #spotify {
