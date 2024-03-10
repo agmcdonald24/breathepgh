@@ -37,6 +37,7 @@ body {
 }
 
 #timer {
+  margin-bottom: 0;
   font-size: 16px;
 }
 
