@@ -3,8 +3,8 @@
 var totalDuration = 300;  // Default duration in seconds (5 minutes)
 var breathDuration = 6;   // Default breath cycle duration in seconds
 var soundFiles = [
-    "http://breathepgh.com/wp-content/uploads/2024/02/gong3.wav",
-    "http://breathepgh.com/wp-content/uploads/2024/02/gong4.wav"
+    "http://breathepgh.com/wp-content/uploads/2024/02/Gong1.wav",
+    "http://breathepgh.com/wp-content/uploads/2024/02/Gong2.wav"
 ];
 var volume = 1.0;
 var timerInterval;
@@ -44,7 +44,7 @@ function breathworkTimerLogic() {
     var isInhale = breathCycleIndex === 0;
 
     // Play the sound
-    var audio = new Audio(soundFiles[isInhale ? 0 : 1]);
+    var audio = new Audio(soundFiles[isInhale ? 1 : 0]);
     audio.volume = volume;
     audio.play();
 
