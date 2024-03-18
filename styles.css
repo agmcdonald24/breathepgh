@@ -1,15 +1,59 @@
-/* Breathe In animation */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+#settings {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container {
+  gap: 0.5em;
+}
+
+#duration-select {
+  width: 10%;
+}
+
+#interval-select {
+  width: 10%;
+}
+
+.padded-container {
+  width: 50%;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+}
+
+#timer {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+#spotify {
+  width: 40%;
+}
+
 @keyframes breatheInAnimation {
   0% { font-size: 18px; }
   100% { font-size: 24px; }
 }
 
-/* Breathe Out animation */
 @keyframes breatheOutAnimation {
   0% { font-size: 24px; }
   100% { font-size: 18px; }
 }
-
 
 .inhale {
   animation: breatheInAnimation 4s forwards;
