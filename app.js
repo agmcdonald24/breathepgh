@@ -13,8 +13,7 @@ var startTime;
 var animationElement = document.getElementById('breathingAnimation');
 
 // Function to update the timer display
-function updateTimer() {
-  var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+function updateTimer(elapsedTime) {
   var minutes = Math.floor(elapsedTime / 60);
   var seconds = elapsedTime % 60;
   document.getElementById('timer').innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
@@ -24,46 +23,38 @@ function updateTimer() {
 function playBreathingAnimation(inhale) {
   animationElement.innerText = inhale ? 'Breathe In' : 'Breathe Out';
 
-  // Play the sound
-  var audio = new Audio(soundFiles[inhale ? 1 : 0]);
-  audio.volume = volume;
-
   if (inhale) {
-      audio.play();
       animationElement.innerText = 'Breathe In';
       animationElement.classList.add('inhale');
       animationElement.classList.remove('exhale');
     } else {
-      audio.play();
       animationElement.innerText = 'Breathe Out';
       animationElement.classList.add('exhale');
       animationElement.classList.remove('inhale');
-  }
-};
-
-function changeBreathCycle(inhale) {
-  var breathCycleIdentifier = document.getElementById('breathingAnimation');
-
-  playBreathingAnimation(inhale)
+  };
 };
 
 // Function to handle breathwork timer logic
 function breathworkTimerLogic() {
   // Update the timer
-  updateTimer();
-
   var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+  updateTimer(elapsedTime);
 
   // Calculate breath cycle index
   var breathCycleIndex = Math.floor(elapsedTime / breathDuration) % 2;
-  console.log('🚀 ~ breathworkTimerLogic ~ breathCycleIndex:', breathCycleIndex)
 
   // Inhale/Exhale
   var isInhale = breathCycleIndex === 0;
 
+  // Play the sound
+  if (elapsedTime % breathDuration === 0) {
+    var audio = new Audio(soundFiles[isInhale ? 1 : 0]);
+    audio.volume = volume;
+    audio.play();
+  };
+
   // Update the breathing animation
-  if (breathCycleIndex)
-  // playBreathingAnimation(isInhale);
+  playBreathingAnimation(isInhale);
 
   // Check if the total duration has been reached
   if (elapsedTime >= totalDuration) {
@@ -71,7 +62,7 @@ function breathworkTimerLogic() {
     stopTimer();
     document.getElementById('breathingAnimation').classList.remove('inhale');
     document.getElementById('breathingAnimation').classList.remove('exhale');
-  }
+  };
 };
 
 // Event listener for the Start button
@@ -111,5 +102,3 @@ document.getElementById('stopBtn').addEventListener('click', function () {
   document.getElementById('timer').innerText = '00:00';
   animationElement.innerText = 'Breathe In';
 });
-
-document.getElementById('breathingAnimation').addEventListener('change', playBreathingAnimation())
