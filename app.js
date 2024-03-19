@@ -1,16 +1,25 @@
-// JavaScript code for the breathwork app
-// Initialize variables
+// Timer vars
 var totalDuration = 300;  // Default duration in seconds (5 minutes)
 var breathDuration = 6;   // Default breath cycle duration in seconds
+var timerInterval;
+var startTime;
+
+// Audio
 var soundFiles = [
   "http://breathepgh.com/wp-content/uploads/2024/02/Gong1.wav",
   "http://breathepgh.com/wp-content/uploads/2024/02/Gong2.wav"
 ];
 var volume = 1.0;
-var timerInterval;
-var startTime;
+var exhaleAudio = new Audio(soundFiles[0]);
+var inhaleAudio = new Audio(soundFiles[1]);
+exhaleAudio.volume = volume;
+inhaleAudio.volume = volume;
 
+// DOM Elements
 var animationElement = document.getElementById('breathingAnimation');
+var startBtn = document.getElementById('startBtn');
+var stopBtn = document.getElementById('stopBtn');
+var timerElement = document.getElementById('timer');
 
 // Function to update the timer display
 function updateTimer(elapsedTime) {
@@ -24,13 +33,13 @@ function playBreathingAnimation(inhale) {
   animationElement.innerText = inhale ? 'Breathe In' : 'Breathe Out';
 
   if (inhale) {
-      animationElement.innerText = 'Breathe In';
-      animationElement.classList.add('inhale');
-      animationElement.classList.remove('exhale');
+    animationElement.innerText = 'Breathe In';
+    animationElement.classList.add('inhale');
+    animationElement.classList.remove('exhale');
     } else {
-      animationElement.innerText = 'Breathe Out';
-      animationElement.classList.add('exhale');
-      animationElement.classList.remove('inhale');
+    animationElement.innerText = 'Breathe Out';
+    animationElement.classList.add('exhale');
+    animationElement.classList.remove('inhale');
   };
 };
 
@@ -48,9 +57,11 @@ function breathworkTimerLogic() {
 
   // Play the sound
   if (elapsedTime % breathDuration === 0) {
-    var audio = new Audio(soundFiles[isInhale ? 1 : 0]);
-    audio.volume = volume;
-    audio.play();
+    if (isInhale) {
+      inhaleAudio.play();
+    } else {
+      exhaleAudio.play();
+    }
   };
 
   // Update the breathing animation
@@ -60,19 +71,19 @@ function breathworkTimerLogic() {
   if (elapsedTime >= totalDuration) {
     // Stop the timer
     stopTimer();
-    document.getElementById('breathingAnimation').classList.remove('inhale');
-    document.getElementById('breathingAnimation').classList.remove('exhale');
+    animationElement.classList.remove('inhale');
+    animationElement.classList.remove('exhale');
   };
 };
 
 // Event listener for the Start button
-document.getElementById('startBtn').addEventListener('click', function () {
+startBtn.addEventListener('click', function () {
   // Disable the Start button and enable the Stop button
-  document.getElementById('startBtn').disabled = true;
-  document.getElementById('stopBtn').disabled = false;
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
 
-  document.getElementById('breathingAnimation').classList.remove('exhale');
-  document.getElementById('breathingAnimation').classList.add('inhale');
+  animationElement.classList.remove('exhale');
+  animationElement.classList.add('inhale');
 
   // Get the selected duration and interval from the dropdowns
   totalDuration = parseInt(document.getElementById('duration-select').value) * 60;
@@ -86,19 +97,19 @@ document.getElementById('startBtn').addEventListener('click', function () {
 });
 
 // Event listener for the Stop button
-document.getElementById('stopBtn').addEventListener('click', function () {
+stopBtn.addEventListener('click', function () {
   // Enable the Start button and disable the Stop button
-  document.getElementById('startBtn').disabled = false;
-  document.getElementById('stopBtn').disabled = true;
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
 
   // Clear breathing animation
-  document.getElementById('breathingAnimation').classList.remove('inhale');
-  document.getElementById('breathingAnimation').classList.remove('exhale');
+  animationElement.classList.remove('inhale');
+  animationElement.classList.remove('exhale');
 
   // Clear the timer interval
   clearInterval(timerInterval);
 
   // Reset the timer display
-  document.getElementById('timer').innerText = '00:00';
+  timerElement.innerText = '00:00';
   animationElement.innerText = 'Breathe In';
 });
