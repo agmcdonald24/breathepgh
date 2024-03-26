@@ -12,6 +12,10 @@ body {
   gap: 1em;
 }
 
+select {
+  min-width: fit-content;
+}
+
 .centered {
   display: flex;
   justify-content: center;
@@ -62,3 +66,16 @@ body {
 .exhale {
   animation: breatheOutAnimation 4s forwards;
 }
+
+@media (max-width: 550px) {
+  .settings-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+}
+
+/* Media query reserved for the smallest possible screens */
+/* @media (max-width: 265px) {
+
+} */
