@@ -14,6 +14,8 @@ var exhaleAudio = new Audio(soundFiles[0]);
 var inhaleAudio = new Audio(soundFiles[1]);
 exhaleAudio.volume = volume;
 inhaleAudio.volume = volume;
+exhaleAudio.preload = "auto";
+inhaleAudio.preload = "auto";
 
 // DOM Elements
 var animationElement = document.getElementById('breathingAnimation');
