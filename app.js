@@ -6,8 +6,8 @@ var startTime;
 
 // Audio
 var soundFiles = [
-  "http://breathepgh.com/wp-content/uploads/2024/02/Gong1.wav",
-  "http://breathepgh.com/wp-content/uploads/2024/02/Gong2.wav"
+  "./audio/Gong1.mp3",
+  "./audio/Gong2.mp3",
 ];
 var volume = 1.0;
 var exhaleAudio = new Audio(soundFiles[0]);
@@ -58,8 +58,10 @@ function breathworkTimerLogic() {
   // Play the sound
   if (elapsedTime % breathDuration === 0) {
     if (isInhale) {
+      console.log("audio.canPlayType? ", inhaleAudio.canPlayType("audio/mp3"));
       inhaleAudio.play();
     } else {
+      console.log("audio.canPlayType? ", exhaleAudio.canPlayType("audio/mp3"));
       exhaleAudio.play();
     }
   };
