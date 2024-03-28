@@ -58,8 +58,10 @@ function breathworkTimerLogic() {
   // Play the sound
   if (elapsedTime % breathDuration === 0) {
     if (isInhale) {
+      console.log("audio.canPlayType? ", inhaleAudio.canPlayType("audio/mp3"));
       inhaleAudio.play();
     } else {
+      console.log("audio.canPlayType? ", exhaleAudio.canPlayType("audio/mp3"));
       exhaleAudio.play();
     }
   };
