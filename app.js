@@ -82,7 +82,6 @@ function breathworkTimerLogic() {
 };
 
 volumeSlider.addEventListener('change', function (event) {
-  console.log("event.target.value: ", event.target.value);
   const newVolume = event.target.value;
   exhaleAudio.volume = newVolume;
   inhaleAudio.volume = newVolume;
