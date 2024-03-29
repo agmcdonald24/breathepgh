@@ -1,32 +1,33 @@
 // Timer vars
-var totalDuration = 300;  // Default duration in seconds (5 minutes)
-var breathDuration = 6;   // Default breath cycle duration in seconds
-var timerInterval;
-var startTime;
+let totalDuration = 300;  // Default duration in seconds (5 minutes)
+let breathDuration = 6;   // Default breath cycle duration in seconds
+const defaultVolume = 0.5;
+let timerInterval;
+let startTime;
 
 // Audio
-var soundFiles = [
+const soundFiles = [
   "./audio/Gong1.mp3",
   "./audio/Gong2.mp3",
 ];
-var volume = 1.0;
-var exhaleAudio = new Audio(soundFiles[0]);
-var inhaleAudio = new Audio(soundFiles[1]);
+const exhaleAudio = new Audio(soundFiles[0]);
+const inhaleAudio = new Audio(soundFiles[1]);
 exhaleAudio.volume = volume;
 inhaleAudio.volume = volume;
 exhaleAudio.preload = "auto";
 inhaleAudio.preload = "auto";
 
 // DOM Elements
-var animationElement = document.getElementById('breathingAnimation');
-var startBtn = document.getElementById('startBtn');
-var stopBtn = document.getElementById('stopBtn');
-var timerElement = document.getElementById('timer');
+const animationElement = document.getElementById('breathingAnimation');
+const volumeSlider = document.getElementById('volumeRange');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const timerElement = document.getElementById('timer');
 
 // Function to update the timer display
 function updateTimer(elapsedTime) {
-  var minutes = Math.floor(elapsedTime / 60);
-  var seconds = elapsedTime % 60;
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
   document.getElementById('timer').innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
@@ -79,6 +80,13 @@ function breathworkTimerLogic() {
     animationElement.classList.remove('exhale');
   };
 };
+
+volumeSlider.addEventListener('change', function (event) {
+  console.log("event.target.value: ", event.target.value);
+  const newVolume = evenet.target.value;
+  exhaleAudio.volume = newVolume;
+  inhaleAudio.volume = newVolume;
+});
 
 // Event listener for the Start button
 startBtn.addEventListener('click', function () {
