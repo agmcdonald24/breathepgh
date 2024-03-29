@@ -12,14 +12,14 @@ const soundFiles = [
 ];
 const exhaleAudio = new Audio(soundFiles[0]);
 const inhaleAudio = new Audio(soundFiles[1]);
-exhaleAudio.volume = volume;
-inhaleAudio.volume = volume;
+exhaleAudio.volume = defaultVolume;
+inhaleAudio.volume = defaultVolume;
 exhaleAudio.preload = "auto";
 inhaleAudio.preload = "auto";
 
 // DOM Elements
 const animationElement = document.getElementById('breathingAnimation');
-const volumeSlider = document.getElementById('volumeRange');
+const volumeSlider = document.getElementById('volumeSlider');
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const timerElement = document.getElementById('timer');
@@ -83,7 +83,7 @@ function breathworkTimerLogic() {
 
 volumeSlider.addEventListener('change', function (event) {
   console.log("event.target.value: ", event.target.value);
-  const newVolume = evenet.target.value;
+  const newVolume = event.target.value;
   exhaleAudio.volume = newVolume;
   inhaleAudio.volume = newVolume;
 });
