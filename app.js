@@ -10,6 +10,9 @@ const soundFiles = [
   "./audio/Gong1.mp3",
   "./audio/Gong2.mp3",
 ];
+const silentAudio = new Audio();
+silentAudio.src = "data:audio/mp3;base64,";
+// silentAudio.preload = "auto";
 const exhaleAudio = new Audio(soundFiles[0]);
 const inhaleAudio = new Audio(soundFiles[1]);
 exhaleAudio.volume = defaultVolume;
@@ -61,12 +64,10 @@ function breathworkTimerLogic() {
   // Play the sound
   if (elapsedTime % breathDuration === 0) {
     if (isInhale) {
-      console.log("audio.canPlayType? ", inhaleAudio.canPlayType("audio/mp3"));
       inhaleAudio.play();
     } else {
-      console.log("audio.canPlayType? ", exhaleAudio.canPlayType("audio/mp3"));
       exhaleAudio.play();
-    }
+    };
   };
 
   // Update the breathing animation
@@ -92,6 +93,8 @@ startBtn.addEventListener('click', function () {
   // Disable the Start button and enable the Stop button
   startBtn.disabled = true;
   stopBtn.disabled = false;
+
+  silentAudio.play();
 
   animationElement.classList.remove('exhale');
   animationElement.classList.add('inhale');
