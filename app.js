@@ -10,6 +10,9 @@ const soundFiles = [
   "./audio/Gong1.mp3",
   "./audio/Gong2.mp3",
 ];
+
+// silentAudio plays when users interacts with button
+// in order to get around iOS memory protection code
 const silentAudio = new Audio();
 silentAudio.src = "data:audio/mp3;base64,";
 // silentAudio.preload = "auto";
