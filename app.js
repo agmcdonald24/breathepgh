@@ -7,8 +7,8 @@ let startTime;
 
 // Audio
 const soundFiles = [
-  "./audio/Gong1.mp3",
   "./audio/Gong2.mp3",
+  "./audio/Gong1.mp3",
 ];
 
 // silentAudio plays when users interacts with button
