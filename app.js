@@ -1,32 +1,39 @@
 // Timer vars
-var totalDuration = 300;  // Default duration in seconds (5 minutes)
-var breathDuration = 6;   // Default breath cycle duration in seconds
-var timerInterval;
-var startTime;
+let totalDuration = 300;  // Default duration in seconds (5 minutes)
+let breathDuration = 6;   // Default breath cycle duration in seconds
+const defaultVolume = 0.5;
+let timerInterval;
+let startTime;
 
 // Audio
-var soundFiles = [
+const soundFiles = [
   "./audio/Gong1.mp3",
   "./audio/Gong2.mp3",
 ];
-var volume = 1.0;
-var exhaleAudio = new Audio(soundFiles[0]);
-var inhaleAudio = new Audio(soundFiles[1]);
-exhaleAudio.volume = volume;
-inhaleAudio.volume = volume;
+
+// silentAudio plays when users interacts with button
+// in order to get around iOS memory protection code
+const silentAudio = new Audio();
+silentAudio.src = "data:audio/mp3;base64,";
+// silentAudio.preload = "auto";
+const exhaleAudio = new Audio(soundFiles[0]);
+const inhaleAudio = new Audio(soundFiles[1]);
+exhaleAudio.volume = defaultVolume;
+inhaleAudio.volume = defaultVolume;
 exhaleAudio.preload = "auto";
 inhaleAudio.preload = "auto";
 
 // DOM Elements
-var animationElement = document.getElementById('breathingAnimation');
-var startBtn = document.getElementById('startBtn');
-var stopBtn = document.getElementById('stopBtn');
-var timerElement = document.getElementById('timer');
+const animationElement = document.getElementById('breathingAnimation');
+const volumeSlider = document.getElementById('volumeSlider');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const timerElement = document.getElementById('timer');
 
 // Function to update the timer display
 function updateTimer(elapsedTime) {
-  var minutes = Math.floor(elapsedTime / 60);
-  var seconds = elapsedTime % 60;
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
   document.getElementById('timer').innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
@@ -60,12 +67,10 @@ function breathworkTimerLogic() {
   // Play the sound
   if (elapsedTime % breathDuration === 0) {
     if (isInhale) {
-      console.log("audio.canPlayType? ", inhaleAudio.canPlayType("audio/mp3"));
       inhaleAudio.play();
     } else {
-      console.log("audio.canPlayType? ", exhaleAudio.canPlayType("audio/mp3"));
       exhaleAudio.play();
-    }
+    };
   };
 
   // Update the breathing animation
@@ -80,11 +85,19 @@ function breathworkTimerLogic() {
   };
 };
 
+volumeSlider.addEventListener('change', function (event) {
+  const newVolume = event.target.value;
+  exhaleAudio.volume = newVolume;
+  inhaleAudio.volume = newVolume;
+});
+
 // Event listener for the Start button
 startBtn.addEventListener('click', function () {
   // Disable the Start button and enable the Stop button
   startBtn.disabled = true;
   stopBtn.disabled = false;
+
+  silentAudio.play();
 
   animationElement.classList.remove('exhale');
   animationElement.classList.add('inhale');
