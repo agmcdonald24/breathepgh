@@ -9,7 +9,6 @@ let startTime;
 const soundFiles = [
   "./audio/Gong1.mp3",
   "./audio/Gong2.mp3",
-  
 ];
 
 // silentAudio plays when users interacts with button
@@ -29,6 +28,7 @@ const animationElement = document.getElementById('breathingAnimation');
 const volumeSlider = document.getElementById('volumeSlider');
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
+const timerContainer = document.getElementById('timer-container');
 const timerElement = document.getElementById('timer');
 
 // Function to update the timer display
@@ -97,6 +97,8 @@ startBtn.addEventListener('click', function () {
   // Disable the Start button and enable the Stop button
   startBtn.disabled = true;
   stopBtn.disabled = false;
+
+  timerContainer.classList.remove('hidden');
 
   silentAudio.play();
 
